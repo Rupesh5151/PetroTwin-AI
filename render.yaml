@@ -22,7 +22,33 @@ services:
     envVars:
       - key: ML_SERVICE_URL
         value: https://petrotwin-ml-service.onrender.com
+
       - key: SPRING_PROFILES_ACTIVE
         value: prod
 
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: petrotwin-db
+          property: connectionString
+
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: petrotwin-db
+          property: user
+
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: petrotwin-db
+          property: password
+
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.postgresql.Driver
+
+      - key: SPRING_JPA_DATABASE_PLATFORM
+        value: org.hibernate.dialect.PostgreSQLDialect
+
+databases:
+  - name: petrotwin-db
+    plan: free
+    region: oregon
 
