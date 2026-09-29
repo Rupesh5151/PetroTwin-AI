@@ -23,5 +23,6 @@ services:
       - key: ML_SERVICE_URL
         value: https://petrotwin-ml-service.onrender.com
       - key: SPRING_PROFILES_ACTIVE
-        value: local
+        value: prod
+
 
