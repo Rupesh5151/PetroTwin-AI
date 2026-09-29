@@ -6,13 +6,16 @@ server:
 spring:
   application:
     name: petrotwin-backend
+
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:local}
+
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:petrotwin;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
+    url: jdbc:${SPRING_DATASOURCE_URL:h2:mem:petrotwin;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
     username: ${SPRING_DATASOURCE_USERNAME:sa}
     password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.h2.Driver}
+
   jpa:
     database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.H2Dialect}
     hibernate:
@@ -21,6 +24,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
   flyway:
     enabled: true
     baseline-on-migrate: true
@@ -31,6 +35,7 @@ management:
     web:
       exposure:
         include: health,info,prometheus,metrics
+
   endpoint:
     health:
       show-details: always
