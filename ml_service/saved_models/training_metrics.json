@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-09-29T23:02:53.210684",
+  "training_dataset_samples": 3500,
+  "features": [
+    "temp_c",
+    "viscosity_cp",
+    "spm",
+    "stroke_length_m",
+    "day",
+    "recent_oil_bpd",
+    "lag_1",
+    "lag_7",
+    "darcy_inflow_bpd",
+    "q_pump_bpd"
+  ],
+  "production_forecaster": {
+    "model_type": "GradientBoostingRegressor",
+    "residual_mae_bpd": 1.606,
+    "residual_rmse_bpd": 2.249,
+    "residual_r2": 0.3221,
+    "cv_mae_bpd": 1.608,
+    "hybrid_oil_mae_bpd": 1.606,
+    "hybrid_oil_r2": 0.9996
+  },
+  "rod_floating_classifier": {
+    "model_type": "RandomForestClassifier",
+    "accuracy": 0.99,
+    "f1_score": 0.72,
+    "roc_auc": 0.9534
+  },
+  "parted_rod_classifier": {
+    "model_type": "GradientBoostingClassifier",
+    "accuracy": 0.9929,
+    "f1_score": 0.2857,
+    "roc_auc": 0.8816
+  },
+  "anomaly_detector": {
+    "model_type": "IsolationForest",
+    "contamination": 0.04,
+    "n_estimators": 150,
+    "inlier_ratio": 0.96
+  }
+}

@@ -1,0 +1,40 @@
+# Node dependencies and build
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Java Maven / Gradle build
+target/
+backend/springboot/target/
+.gradle/
+build/
+
+# Python cache and environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local databases and runtime state
+pgdata/
+*.sqlite3
+*.log
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db

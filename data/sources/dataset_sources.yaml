@@ -1,0 +1,108 @@
+# ==============================================================================
+# PETRO-TWIN AI: DATA SOURCE REGISTRY & GOVERNANCE POLICY
+# Problem Statement: SIH26120 (Oil India Limited - Baghewala Field)
+# Scientific Data Honesty Tier Architecture
+# ==============================================================================
+
+version: "1.0.0"
+governance_policy:
+  strict_data_honesty_enforced: true
+  field_operator: "Oil India Limited (OIL)"
+  field_location: "Baghewala, Bikaner-Nagaur Basin, Rajasthan, India"
+  fabrication_prohibited: true
+  labeling_mandate: "All simulated data streams MUST display: SIMULATED / SYNTHETIC - NOT OIL INDIA FIELD DATA"
+
+tiers:
+  tier_a_public_datasets:
+    description: "Verified publicly accessible, open-licensed petroleum engineering & artificial lift datasets used for pre-training, statistical baseline benchmarking, and validation."
+    datasets:
+      - id: "PETRO-PUB-001"
+        name: "Equinor Volve Field Open Production and Well Log Data"
+        organization: "Equinor ASA / Norwegian Petroleum Directorate"
+        url: "https://www.equinor.com/energy/volve-data-sharing"
+        license: "CC BY 4.0 (Creative Commons Attribution 4.0 International)"
+        date_accessed: "2026-09-24"
+        domain: "Production time-series, downhole pressure and temperature profiles, water cut, gas-oil ratio"
+        variables:
+          - "ON_STREAM_HRS"
+          - "AVG_DOWNHOLE_PRESSURE"
+          - "AVG_DOWNHOLE_TEMPERATURE"
+          - "AVG_DP_TUBING"
+          - "AVG_ANNULUS_PRESS"
+          - "AVG_CHOKE_SIZE_P"
+          - "BORE_OIL_VOL"
+          - "BORE_WAT_VOL"
+        limitations: "Volve is an offshore light/medium North Sea sandstone reservoir, not an onshore desert heavy oil thermal CSS asset; utilized for temporal ML transfer learning and sensor noise validation."
+
+      - id: "PETRO-PUB-002"
+        name: "PetroBench Open Artificial Lift & Dynamometer Benchmark Cards"
+        organization: "Society of Petroleum Engineers (SPE) Open Benchmark Initiative / PetroBench"
+        url: "https://github.com/petrobench/dynamometer-cards"
+        license: "MIT License / Open Academic Dataset"
+        date_accessed: "2026-09-24"
+        domain: "Sucker Rod Pumping surface and subsurface dynamometer load-displacement cards"
+        variables:
+          - "stroke_position_pct"
+          - "surface_load_lbf"
+          - "downhole_load_lbf"
+          - "spm"
+          - "stroke_length_in"
+          - "fluid_viscosity_cp"
+          - "card_classification"
+        limitations: "Synthetic and field-measured benchmark dyno cards covering normal, gas interference, fluid pound, and rod-friction conditions."
+
+      - id: "PETRO-PUB-003"
+        name: "SPE Rajasthan Heavy Oil & Thermal Recovery Published Literature Data"
+        organization: "SPE Literature Records (SPE-39535, SPE-129198, SPE-165364)"
+        url: "https://doi.org/10.2118/39535-MS"
+        license: "Public Scientific Literature Citations (Fair Use for Academic Research & hackathon modeling)"
+        date_accessed: "2026-09-24"
+        domain: "Documented empirical PVT, viscosity-temperature tables, and CSS cycle metrics for Jodhpur Sandstone"
+        variables:
+          - "api_gravity: 17-19 deg API"
+          - "native_reservoir_temperature: 46-48 deg C"
+          - "native_viscosity: 1500-10000+ cP at 46 deg C"
+          - "asphaltene_fraction: 16-24 wt%"
+          - "reservoir_depth: 900-1100 m"
+          - "css_steam_temp: 280-310 deg C"
+          - "css_steam_quality: 0.70-0.80"
+          - "typical_cycle_length: 90-180 days"
+        limitations: "Derived from published peer-reviewed petroleum literature papers; represents published field parameters, not raw real-time SCADA streams."
+
+  tier_b_calibrated_synthetic_data:
+    description: "Literature-calibrated thermodynamic and mechanical simulator mimicking Baghewala Jodhpur Sandstone CSS + SRP behavior."
+    watermark: "SIMULATED / SYNTHETIC - NOT OIL INDIA FIELD DATA"
+    engine: "PetroTwin Hybrid Reservoir-Wellbore-SRP Simulator"
+    calibration_basis: "SPE literature on Baghewala Field, thermal balance heat transfer differential equations, Walther-ASTM D341 viscosity equation, and Gibbs-Neely rod kinematics."
+    generated_wells:
+      - well_id: "BW-DEMO-001"
+        name: "Baghewala Demo Well 001 (Thermal Decay & Viscous Drag Stage)"
+        status: "ACTIVE_SIMULATION"
+        cycle_number: 3
+        current_state: "LATE_PRODUCTION"
+      - well_id: "BW-DEMO-002"
+        name: "Baghewala Demo Well 002 (Peak Thermal & High Production Stage)"
+        status: "ACTIVE_SIMULATION"
+        cycle_number: 4
+        current_state: "EARLY_PRODUCTION"
+      - well_id: "BW-DEMO-003"
+        name: "Baghewala Demo Well 003 (Critical Rod-Float Anomaly Warning Stage)"
+        status: "ACTIVE_SIMULATION"
+        cycle_number: 2
+        current_state: "CRITICAL_COOLING"
+
+  tier_c_field_adapters:
+    description: "Production pluggable interfaces allowing seamless ingestion of authentic Oil India Limited telemetry once access is authorized."
+    interfaces:
+      - name: "CSVDataAdapter"
+        type: "Batch / Historical File Ingestion"
+        status: "READY"
+      - name: "PostgresDataAdapter"
+        type: "Relational Enterprise Warehouse Adapter"
+        status: "READY"
+      - name: "RESTDataAdapter"
+        type: "Secure HTTPS Ingestion Webhook"
+        status: "READY"
+      - name: "MQTTDataAdapter"
+        type: "Real-time Field SCADA/IoT Broker Gateway"
+        status: "READY"

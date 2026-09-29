@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: petrotwin-ml-service
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: pip install -r ml_service/requirements.txt
+    startCommand: uvicorn ml_service.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+
+  - type: web
+    name: petrotwin-backend
+    env: docker
+    dockerfilePath: docker/Dockerfile.backend
+    dockerContext: .
+    region: oregon
+    plan: free
+    branch: main
+    envVars:
+      - key: ML_SERVICE_URL
+        value: https://petrotwin-ml-service.onrender.com
+      - key: SPRING_PROFILES_ACTIVE
+        value: local
+

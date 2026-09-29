@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Light Theme Canvas */
+  --bg-primary: #f4f5f7;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fafafa;
+  --bg-elevated: #f8f9fa;
+  --bg-subtle: #f1f3f5;
+  --bg-accent-subtle: #eff6ff;
+
+  /* Neo-Brutalist Crisp Borders (1px dark, not thick) */
+  --border-dark: #18181b;
+  --border-subtle: #e4e4e7;
+  --border-muted: #d4d4d8;
+  --border-active: #2563eb;
+
+  /* Hard Offset Drop Shadows */
+  --neo-shadow-xs: 1px 1px 0px #18181b;
+  --neo-shadow-sm: 2px 2px 0px #18181b;
+  --neo-shadow: 3px 3px 0px #18181b;
+  --neo-shadow-hover: 4px 4px 0px #18181b;
+  --neo-shadow-blue: 3px 3px 0px #2563eb;
+
+  /* Text & Contrast */
+  --text-main: #09090b;
+  --text-muted: #52525b;
+  --text-faint: #71717a;
+
+  /* Disciplined Color Palette (less different colors) */
+  --brand-primary: #2563eb;       /* Industrial Cobalt Blue */
+  --brand-primary-hover: #1d4ed8;
+  --brand-dark: #18181b;          /* Obsidian */
+  
+  --status-green: #16a34a;        /* Clean emerald */
+  --status-green-bg: #f0fdf4;
+  --status-amber: #d97706;        /* Clean amber */
+  --status-amber-bg: #fffbeb;
+  --status-red: #dc2626;          /* Clean crimson */
+  --status-red-bg: #fef2f2;
+  --status-blue: #2563eb;
+  --status-blue-bg: #eff6ff;
+
+  --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Clean Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f3f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 3px;
+  border: 1px solid #18181b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #18181b;
+}
+
+/* Neo-Brutalist Card Component */
+.glass-panel {
+  background: #ffffff;
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0px var(--border-dark);
+  color: var(--text-main);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.glass-panel:hover {
+  box-shadow: 3px 3px 0px var(--border-dark);
+  transform: translate(-1px, -1px);
+}
+
+.glass-panel-active {
+  border-color: var(--brand-primary);
+  box-shadow: 3px 3px 0px var(--brand-primary);
+}
+
+/* Neo-Brutalist Badges */
+.tech-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-dark);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 1px 1px 0px var(--border-dark);
+}
+
+.badge-sim {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.badge-cyan, .badge-blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.badge-green {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.badge-red {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.badge-amber {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.badge-dark {
+  background: #18181b;
+  color: #ffffff;
+}
+
+/* Live Pulse Indicator */
+.live-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--status-green);
+  display: inline-block;
+  border: 1px solid #18181b;
+}
+
+.metric-number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+/* Neo-Brutalist Buttons */
+.neo-btn {
+  background: #ffffff;
+  color: #09090b;
+  border: 1px solid #18181b;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #18181b;
+  transition: all 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #18181b;
+}
+
+.neo-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #18181b;
+}
+
+.neo-btn-primary {
+  background: #18181b;
+  color: #ffffff;
+  box-shadow: 2px 2px 0px #2563eb;
+}
+
+.neo-btn-primary:hover {
+  box-shadow: 3px 3px 0px #2563eb;
+}
+
+.neo-btn-accent {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #18181b;
+  box-shadow: 2px 2px 0px #18181b;
+}
+
+.neo-btn-accent:hover {
+  background: #1d4ed8;
+}
+
+/* Control slider custom styling */
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #e4e4e7;
+  border: 1px solid #18181b;
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: #18181b;
+  border: 1px solid #18181b;
+  cursor: pointer;
+  box-shadow: 1px 1px 0px #000;
+  transition: transform 0.1s ease;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #2563eb;
+}

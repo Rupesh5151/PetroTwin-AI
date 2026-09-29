@@ -1,0 +1,74 @@
+# ==============================================================================
+# PETRO-TWIN AI: PHYSICS CONFIGURATION
+# Documented empirical and thermodynamic parameters for Baghewala Field
+# Jodhpur Sandstone Formation Heavy Oil CSS + SRP System
+# ==============================================================================
+
+field:
+  name: "Baghewala Field"
+  basin: "Bikaner-Nagaur Basin, Rajasthan, India"
+  operator: "Oil India Limited (OIL)"
+  formation: "Jodhpur Sandstone"
+  lithology: "Fine to medium grained porous sandstone"
+
+reservoir:
+  depth_m: 950.0                # True vertical depth (m)
+  thickness_m: 18.0             # Net pay thickness (m)
+  initial_temperature_c: 47.0   # Native reservoir temperature (deg C)
+  initial_pressure_bar: 55.0    # Native reservoir pore pressure (bar)
+  porosity_fraction: 0.26       # Sandstone porosity (26%)
+  permeability_md: 850.0        # Absolute permeability (milliDarcy)
+  drainage_radius_m: 120.0      # Estimated drainage radius (m)
+  wellbore_radius_m: 0.108      # 8.5 inch hole / 7 inch casing (m)
+  rock_heat_capacity_kj_kg_k: 0.92 # Volumetric heat capacity of rock matrix
+  rock_density_kg_m3: 2450.0    # Bulk sandstone density
+
+fluid:
+  api_gravity: 18.2             # Specific gravity ~ 0.945 g/cm3
+  density_kg_m3: 945.0          # Native oil density at surface
+  dead_oil_viscosity_47c_cp: 4200.0  # Viscosity at native temp (cP)
+  dead_oil_viscosity_100c_cp: 145.0  # Viscosity at 100 deg C (cP)
+  dead_oil_viscosity_200c_cp: 14.5   # Viscosity at 200 deg C (cP)
+  viscosity_walther_a: 8.924         # ASTM D341 / Walther equation constant A
+  viscosity_walther_b: 3.315         # ASTM D341 / Walther equation constant B
+  asphaltene_wt_pct: 18.5       # Asphaltene content (wt %)
+  specific_heat_kj_kg_k: 2.10   # Oil specific heat capacity
+
+css_steam:
+  steam_temp_c: 295.0           # Saturated steam injection temperature (deg C)
+  steam_pressure_bar: 80.0      # Injection pressure at wellhead (bar)
+  steam_quality_fraction: 0.78  # Dryness fraction at wellhead (78% vapor)
+  latent_heat_kj_kg: 1420.0     # Latent heat of vaporization at injection pressure
+  water_heat_capacity_kj_kg_k: 4.184
+  typical_cycle_steam_mass_tons: 2500.0 # Tons Cold Water Equivalent (CWE)
+  typical_soak_days: 6.0        # Soak duration (days)
+  conduction_loss_coefficient: 0.0145 # Thermal decay exponent to cap/base rock (1/day)
+  fluid_heat_withdrawal_factor: 0.0032 # Heat removed per barrel of fluid produced
+
+srp_mechanical:
+  pump_depth_m: 900.0           # Setting depth of bottomhole pump (m)
+  plunger_diameter_mm: 57.15    # 2.25 inch pump plunger (mm)
+  plunger_area_m2: 0.002565
+  rod_diameter_top_mm: 25.4     # 1-inch top rod section (Grade D steel)
+  rod_diameter_mid_mm: 22.22    # 7/8-inch mid rod section
+  rod_diameter_bot_mm: 19.05    # 3/4-inch bottom sinker bar section
+  rod_density_kg_m3: 7850.0     # Steel density
+  rod_elastic_modulus_gpa: 200.0 # Young's modulus for rod stretch calculations
+  rod_total_weight_in_air_n: 31200.0 # Dry weight of rod string (~3,180 kg)
+  tubing_id_mm: 62.0            # 2-7/8 inch tubing inner diameter (mm)
+  stroke_length_m: 2.40         # Default stroke length (m)
+  spm_default: 6.5              # Default strokes per minute
+  vfd_frequency_hz: 42.0        # Default VFD motor frequency
+  gearbox_torque_rating_in_lbs: 320000.0 # API Gearbox rating
+  beam_structure_rating_lbs: 25000.0     # Structure rating
+  rod_allowable_stress_psi: 32000.0      # Modified Goodman diagram allowable stress
+
+constraints:
+  max_injection_pressure_bar: 110.0   # Formation parting / fracture pressure limit
+  min_soak_time_days: 2.0             # To prevent dangerous steam breakthrough
+  max_soak_time_days: 15.0            # Thermal dissipation limit
+  min_spm: 2.0                        # Minimum VFD operating threshold
+  max_spm: 10.5                       # Maximum mechanical SPM to prevent rod floating
+  max_peak_polished_rod_load_lbs: 22000.0
+  min_minimum_polished_rod_load_lbs: 1200.0 # Low load triggers slack bridle/rod float
+  critical_viscosity_float_cp: 2200.0 # Above this viscosity, downstroke drag causes float if SPM > 5.5
